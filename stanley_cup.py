@@ -5,12 +5,6 @@ from bs4 import BeautifulSoup
 import datetime
 import mplcursors
 
-
-# Use this info to calculate how many data points there are since the NHL took over
-# the Stanley Cup
-currentYear = datetime.date.today().year
-years_since_beginning = currentYear - 1927
-
 # Request webpage
 url = 'https://www.nhl.com/news/nhl-stanley-cup-champions-winners-complete-list/c-287705398'
 response = requests.get(url)
@@ -19,6 +13,11 @@ response = requests.get(url)
 soup = BeautifulSoup(response.content, "html.parser")
 table = soup.find("div", class_="article-item__body")
 winnerList = table.findAll("li")
+
+# Use this info to calculate how many data points there are since the NHL took over
+# the Stanley Cup
+currentYear = datetime.date.today().year
+years_since_beginning = currentYear - 1927
 
 # Create empty data arrays for plotting
 year_list = []
